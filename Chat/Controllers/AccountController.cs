@@ -1,10 +1,7 @@
-﻿using Chat.ViewModel;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Chat.Controllers
 {
-    [Route("[Controller]")]
     public class AccountController : Controller
     {
         public IActionResult Login()
@@ -12,18 +9,23 @@ namespace Chat.Controllers
             return View();
         }
 
-        [HttpPost("Register")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAccount(RegisterViewModel register)
+        public IActionResult Register()
         {
-            return null;
+            return View();
         }
 
-        [HttpPost("Login")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel login)
-        {
-            return null;
-        }
+        //[HttpPost("Register")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> CreateAccount(RegisterViewModel register)
+        //{
+        //    return null;
+        //}
+
+        //[HttpPost("Login")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Login(LoginViewModel login)
+        //{
+        //    return null;
+        //}
     }
 }
