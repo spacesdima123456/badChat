@@ -5,6 +5,19 @@
     {
       "library": "knockout@3.5.1",
       "destination": "wwwroot/lib/knockout/"
+    },
+    {
+      "library": "signalr.js@2.4.2",
+      "destination": "wwwroot/lib/signalr.js/"
+    },
+    {
+      "provider": "unpkg",
+      "library": "@microsoft/signalr@latest",
+      "destination": "wwwroot/lib/microsoft/signalr/",
+      "files": [
+        "dist/browser/signalr.js",
+        "dist/browser/signalr.min.js"
+      ]
     }
   ]
 }
