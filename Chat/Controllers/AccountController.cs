@@ -1,8 +1,8 @@
-﻿using Chat.Entities;
-using Chat.ViewModel;
+﻿using Chat.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Chat.Models;
 
 namespace Chat.Controllers
 {
@@ -32,7 +32,7 @@ namespace Chat.Controllers
                 var userInfo = await _userManager.FindByEmailAsync(register.Email);
                 if (userInfo == null)
                 {
-                    var user = new User { Email = register.Email, UserName = register.UserName };
+                    var user = new User(register.FullName) { Email = register.Email, UserName = register.UserName };
                     var result = await _userManager.CreateAsync(user, register.Password);
                     if (result.Succeeded)
                     {

@@ -8,13 +8,9 @@
     @RenderSection("Style", required: false)
 </head>
 <body>
-    <header></header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<header></header>
+@RenderBody()
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/knockout/knockout-latest.js"></script>
     @RenderSection("Scripts", required: false)

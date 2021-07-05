@@ -1,9 +1,12 @@
-using Chat.Entities;
+using Chat.Data;
 using Chat.Hubs;
 using Chat.Identity.ErrorDescriber;
+using Chat.Models;
+using Chat.Services.UserOnline;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +32,7 @@ namespace Chat
             services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddErrorDescriber<RusIdentityErrorDescriber>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddSignalR();
+            services.AddScoped<IUserOnline, UserOnline>();
         }
 
 
@@ -41,7 +45,7 @@ namespace Chat
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                //app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
