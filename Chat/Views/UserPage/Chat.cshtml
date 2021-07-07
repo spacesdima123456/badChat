@@ -2,21 +2,30 @@
     Layout = "_Layout";
 }
 
-
-<div class="row">
+<div class="chat-wrapped row">
     <div class="col-2">
         <span>Активные пользователи</span>
-        <ul id="LgiUsers" class="list-group"></ul>
+        <div class="list-group" data-bind="foreach: users">
+            <a href="#" class="list-group-item" data-bind="click: $parent.userSelected, css: {active: $parent.chosenUser().fullName == fullName}">
+                <p data-bind="text: fullName"></p>
+            </a>
+        </div>
     </div>
-    
-    <div class="col-10">
-        <span>Чат</span>
-        <textarea class="form-control"></textarea>
+    <div class="col-10" data-bind="visible: isVisibleChat">
+        <div class="text-message" data-bind="html: text"></div>
+        <textarea class="form-control" data-bind="textInput: txtMessage"></textarea>
+        <button class="btn btn-dark" data-bind="click: sendMessage" >Отправить</button>
+
     </div>
 </div>
 
-
 @section Scripts {
     <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script src="~/lib/knockout/knockout-latest.js"></script>
     <script src="~/js/chat.js"></script>
+}
+
+@section Style
+{
+    <link rel="stylesheet" href="~/css/chat.css" />
 }

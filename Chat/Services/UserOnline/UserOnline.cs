@@ -1,6 +1,5 @@
 ﻿using System;
 using Chat.Services.UserOnline.Models;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using Chat.Data;

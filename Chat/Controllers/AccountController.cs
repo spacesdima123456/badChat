@@ -30,6 +30,7 @@ namespace Chat.Controllers
             if (ModelState.IsValid)
             {
                 var userInfo = await _userManager.FindByEmailAsync(register.Email);
+
                 if (userInfo == null)
                 {
                     var user = new User(register.FullName) { Email = register.Email, UserName = register.UserName };
@@ -39,13 +40,18 @@ namespace Chat.Controllers
                         await _signInManager.SignInAsync(user, false);
                         return RedirectToAction("Chat", "UserPage");
                     }
-                    else
-                    {
-                        foreach (var error in result.Errors)
-                            ModelState.AddModelError(string.Empty, error.Description);
-                    }
+
+                    foreach (var error in result.Errors)
+                        ModelState.AddModelError(string.Empty, error.Description);
                 }
+
+                else if (userInfo.UserName == register.UserName)
+                    ModelState.AddModelError(string.Empty, "Пользователь с таким логином уже есть.");
+
+                else if (userInfo.Email == register.Email)
+                    ModelState.AddModelError(string.Empty, "Пользователь с таким email уже есть.");
             }
+
             return View(register);
         }
 
@@ -59,8 +65,7 @@ namespace Chat.Controllers
                 if (isAuth.Succeeded)
                     return RedirectToAction("Chat", "UserPage");
 
-                else
-                    ModelState.AddModelError("", "Логин либо пароль не корректны.");
+                ModelState.AddModelError("", "Логин либо пароль не корректны.");
             }
 
             if (string.IsNullOrEmpty(register.Password))

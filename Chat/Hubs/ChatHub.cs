@@ -16,9 +16,9 @@ namespace Chat.Hubs
             _userOnline = userOnline;
         }
 
-        public async Task Send(string userName, string message)
+        public async Task SendMessage(string userId, string message)
         {
-            await Clients.All.SendAsync("Send", message, userName);
+            await Clients.User(userId).SendAsync("GetMessage", message);
         }
 
         public override async Task OnConnectedAsync()
@@ -30,6 +30,8 @@ namespace Chat.Hubs
 
         public override async Task OnDisconnectedAsync(Exception exception)
         {
+            
+
             await _userOnline.DisConnectUserAsync(Context.User.Identity.Name);
             await RefreshUsersOnlineAsync();
             await base.OnDisconnectedAsync(exception);
